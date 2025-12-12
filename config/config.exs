@@ -14,6 +14,7 @@ config :sammelana,
 # Configure the endpoint
 config :sammelana, SammelanaWeb.Endpoint,
   url: [host: "localhost"],
+  server: true,
   adapter: Bandit.PhoenixAdapter,
   render_errors: [
     formats: [html: SammelanaWeb.ErrorHTML, json: SammelanaWeb.ErrorJSON],

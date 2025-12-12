@@ -14,10 +14,20 @@ defmodule SammelanaWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :api_auth do
+    plug SammelanaWeb.Plugs.GoogleAuth
+  end
+
   scope "/", SammelanaWeb do
     pipe_through :browser
 
     get "/", PageController, :home
+  end
+
+  scope "/api", SammelanaWeb do
+    pipe_through [:api, :api_auth]
+
+    get "/hello", HelloController, :index
   end
 
   # Other scopes may use custom stacks.

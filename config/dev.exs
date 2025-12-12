@@ -2,8 +2,8 @@ import Config
 
 # Configure your database
 config :sammelana, Sammelana.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "developer",
+  password: "developer",
   hostname: "localhost",
   database: "sammelana_dev",
   stacktrace: true,

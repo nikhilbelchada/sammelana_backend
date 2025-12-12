@@ -65,7 +65,12 @@ defmodule Sammelana.MixProject do
       {:gettext, "~> 1.0"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.2.0"},
-      {:bandit, "~> 1.5"}
+      {:bandit, "~> 1.5"},
+
+      # Third party
+      {:joken, "~> 2.6"},
+      {:joken_jwks, "~> 1.7"},
+      {:hackney, "~> 1.20"}
     ]
   end
 

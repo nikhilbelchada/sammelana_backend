@@ -12,8 +12,6 @@ defmodule Sammelana.Application do
       Sammelana.Repo,
       {DNSCluster, query: Application.get_env(:sammelana, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Sammelana.PubSub},
-      # Start a worker by calling: Sammelana.Worker.start_link(arg)
-      # {Sammelana.Worker, arg},
       # Start to serve requests, typically the last entry
       SammelanaWeb.Endpoint
     ]
