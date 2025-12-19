@@ -33,6 +33,10 @@ if config_env() == :prod do
 
   maybe_ipv6 = if System.get_env("ECTO_IPV6") in ~w(true 1), do: [:inet6], else: []
 
+  config :sammelana,
+         :issuer,
+         ~S[https://securetoken.google.com/#{System.fetch_env!("FIREBASE_PROJECT_ID")}]
+
   config :sammelana, Sammelana.Repo,
     # ssl: true,
     url: database_url,

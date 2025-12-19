@@ -68,9 +68,8 @@ defmodule Sammelana.MixProject do
       {:bandit, "~> 1.5"},
 
       # Third party
-      {:joken, "~> 2.6"},
-      {:joken_jwks, "~> 1.7"},
-      {:hackney, "~> 1.20"}
+      {:hackney, "~> 1.25"},
+      {:jose, "~> 1.11.10"}
     ]
   end
 

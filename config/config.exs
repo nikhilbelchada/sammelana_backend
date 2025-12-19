@@ -61,6 +61,10 @@ config :logger, :default_formatter,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+config :sammelana,
+       :issuer,
+       ~S[https://securetoken.google.com/#{System.fetch_env!("FIREBASE_PROJECT_ID")}]
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"

@@ -13,7 +13,8 @@ defmodule Sammelana.Application do
       {DNSCluster, query: Application.get_env(:sammelana, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Sammelana.PubSub},
       # Start to serve requests, typically the last entry
-      SammelanaWeb.Endpoint
+      SammelanaWeb.Endpoint,
+      SammelanaWeb.Auth.KeyStore
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
