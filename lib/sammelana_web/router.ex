@@ -25,9 +25,13 @@ defmodule SammelanaWeb.Router do
   end
 
   scope "/api", SammelanaWeb do
-    pipe_through [:api, :api_auth]
+    pipe_through [:api]
 
     get "/hello", HelloController, :index
+    resources "/users", UserController, except: [:new, :edit]
+    resources "/posts", PostController, only: [:create, :update, :delete, :show, :index]
+    resources "/comments", CommentController, only: [:create, :delete, :show]
+    resources "/likes", LikeController, only: [:create, :delete, :show]
   end
 
   # Other scopes may use custom stacks.

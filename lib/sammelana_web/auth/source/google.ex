@@ -16,9 +16,9 @@ defmodule SammelanaWeb.Auth.KeySource.Google do
   end
 
   defp get(url) do
-    {:ok, 200, resp_header, client_ref} = :hackney.request(:get, url, [], "", [])
+    {:ok, 200, _resp_header, client_ref} = :hackney.request(:get, url, [], "", [])
 
-    {:ok, body} = :hackney.body(client_ref)
+    {:ok, _body} = :hackney.body(client_ref)
   end
 
   defp convert_to_jose_keys(json_data) do
