@@ -1,4 +1,6 @@
 defmodule Sammelana.Accounts.User do
+  @primary_key {:id, :binary_id, autogenerate: true}
+  @foreign_key_type :binary_id
   use Ecto.Schema
   import Ecto.Changeset
 

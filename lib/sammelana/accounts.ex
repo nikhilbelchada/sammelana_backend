@@ -72,7 +72,9 @@ defmodule Sammelana.Accounts do
         |> User.changeset(attrs)
         |> Repo.insert()
         |> case do
-          {:ok, user} -> {:ok, user, :created}
+          {:ok, user} ->
+            {:ok, user, :created}
+
           {:error, %Ecto.Changeset{} = changeset} ->
             # If insert failed due to unique constraint (race), try to fetch again
             case Repo.get_by(User, email: email) do

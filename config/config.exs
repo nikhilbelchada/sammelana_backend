@@ -9,7 +9,12 @@ import Config
 
 config :sammelana,
   ecto_repos: [Sammelana.Repo],
-  generators: [timestamp_type: :utc_datetime]
+  generators: [timestamp_type: :utc_datetime, binary_id: true]
+
+# Make migrations and generators use binary_id by default
+config :sammelana, Sammelana.Repo,
+  migration_primary_key: [type: :binary_id],
+  migration_foreign_key: [type: :binary_id]
 
 # Configure the endpoint
 config :sammelana, SammelanaWeb.Endpoint,

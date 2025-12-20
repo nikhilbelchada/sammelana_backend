@@ -30,6 +30,7 @@ defmodule SammelanaWeb.PostControllerTest do
 
   describe "create post" do
     setup [:create_user]
+
     test "renders post when data is valid", %{conn: conn, user: user} do
       create_attrs = Map.put(@create_attrs, :user_id, user.id)
 
@@ -90,10 +91,11 @@ defmodule SammelanaWeb.PostControllerTest do
   end
 
   defp create_post(opts) do
-    post = post_fixture(%{
-      user_id: opts.user.id,
-      title: "post-#{System.unique_integer([:positive])}"
-    })
+    post =
+      post_fixture(%{
+        user_id: opts.user.id,
+        title: "post-#{System.unique_integer([:positive])}"
+      })
 
     %{post: post}
   end

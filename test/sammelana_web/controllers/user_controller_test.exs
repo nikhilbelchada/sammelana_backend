@@ -55,7 +55,11 @@ defmodule SammelanaWeb.UserControllerTest do
     test "returns existing user when email exists", %{conn: conn} do
       user = user_fixture(%{email: "existing@example.com"})
 
-      conn = post(conn, ~p"/api/users/get_or_create", user: %{email: "existing@example.com", name: "irrelevant"})
+      conn =
+        post(conn, ~p"/api/users/get_or_create",
+          user: %{email: "existing@example.com", name: "irrelevant"}
+        )
+
       assert json_response(conn, 200)
       assert json_response(conn, 200)["data"]["id"] == user.id
     end

@@ -2,10 +2,11 @@ defmodule Sammelana.Repo.Migrations.CreateComments do
   use Ecto.Migration
 
   def change do
-    create table(:comments) do
+    create table(:comments, primary_key: false) do
+      add :id, :binary_id, primary_key: true
       add :body, :text
-      add :user_id, references(:users, on_delete: :nothing)
-      add :post_id, references(:posts, on_delete: :nothing)
+      add :user_id, references(:users, on_delete: :nothing, type: :binary_id)
+      add :post_id, references(:posts, on_delete: :nothing, type: :binary_id)
 
       timestamps(type: :utc_datetime)
     end

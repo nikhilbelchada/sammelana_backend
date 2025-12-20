@@ -4,11 +4,9 @@ defmodule SammelanaWeb.LikeControllerTest do
   import Sammelana.ContentFixtures
   import Sammelana.AccountsFixtures
 
-
   setup %{conn: conn} do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
   end
-
 
   describe "create like" do
     setup [:create_user, :create_post]
@@ -19,6 +17,7 @@ defmodule SammelanaWeb.LikeControllerTest do
         user_id: user.id,
         post_id: post.id
       }
+
       conn = post(conn, ~p"/api/likes", like: create_attrs)
       assert %{"id" => id} = json_response(conn, 201)["data"]
 
@@ -50,10 +49,11 @@ defmodule SammelanaWeb.LikeControllerTest do
   end
 
   defp create_like(opts) do
-    like = like_fixture(%{
-      user_id: opts.user.id,
-      post_id: opts.post.id
-    })
+    like =
+      like_fixture(%{
+        user_id: opts.user.id,
+        post_id: opts.post.id
+      })
 
     %{like: like}
   end
