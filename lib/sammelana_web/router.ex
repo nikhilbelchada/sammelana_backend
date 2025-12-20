@@ -28,6 +28,7 @@ defmodule SammelanaWeb.Router do
     pipe_through [:api]
 
     get "/hello", HelloController, :index
+    post "/users/get_or_create", UserController, :get_or_create
     resources "/users", UserController, except: [:new, :edit]
     resources "/posts", PostController, only: [:create, :update, :delete, :show, :index]
     resources "/comments", CommentController, only: [:create, :delete, :show]

@@ -51,6 +51,26 @@ defmodule SammelanaWeb.UserControllerTest do
     end
   end
 
+  describe "get_or_create user" do
+    test "returns existing user when email exists", %{conn: conn} do
+      user = user_fixture(%{email: "existing@example.com"})
+
+      conn = post(conn, ~p"/api/users/get_or_create", user: %{email: "existing@example.com", name: "irrelevant"})
+      assert json_response(conn, 200)
+      assert json_response(conn, 200)["data"]["id"] == user.id
+    end
+
+    test "creates user when not exists", %{conn: conn} do
+      params = %{email: "newuser@example.com", name: "New User", mobileno: "12345", bio: "hi"}
+
+      conn = post(conn, ~p"/api/users/get_or_create", user: params)
+      assert %{"id" => id} = json_response(conn, 201)["data"]
+
+      conn = get(conn, ~p"/api/users/#{id}")
+      assert %{"id" => ^id, "email" => "newuser@example.com"} = json_response(conn, 200)["data"]
+    end
+  end
+
   describe "update user" do
     setup [:create_user]
 

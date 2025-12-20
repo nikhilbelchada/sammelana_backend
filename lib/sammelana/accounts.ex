@@ -56,6 +56,34 @@ defmodule Sammelana.Accounts do
   end
 
   @doc """
+  Gets a user by attrs (such as email) or creates one if not found.
+
+  Returns {:ok, %User{}} on success.
+  """
+  def get_or_create_user(attrs) when is_map(attrs) do
+    email = Map.get(attrs, "email") || Map.get(attrs, :email)
+
+    case Repo.get_by(User, email: email) do
+      %User{} = user ->
+        {:ok, user, :existing}
+
+      nil ->
+        %User{}
+        |> User.changeset(attrs)
+        |> Repo.insert()
+        |> case do
+          {:ok, user} -> {:ok, user, :created}
+          {:error, %Ecto.Changeset{} = changeset} ->
+            # If insert failed due to unique constraint (race), try to fetch again
+            case Repo.get_by(User, email: email) do
+              %User{} = u -> {:ok, u, :existing}
+              _ -> {:error, changeset}
+            end
+        end
+    end
+  end
+
+  @doc """
   Updates a user.
 
   ## Examples
